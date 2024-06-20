@@ -4,11 +4,9 @@ ENV GOPROXY="https://goproxy.cn,direct"
 ARG VERSION
 WORKDIR /app/
 
-COPY go.mod .
-COPY go.sum .
-RUN go mod download
 COPY . .
-RUN CGO_ENABLED=0 go build -ldflags "-s -w" -o ./bin/simple-one-api
+RUN go mod download
+RUN CGO_ENABLED=0 go build -o ./bin/simple-one-api
 
 FROM alpine:latest
 LABEL MAINTAINER="nibuchiwochile@gmail.com"
