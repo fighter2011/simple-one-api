@@ -23,6 +23,10 @@ RUN apk add ca-certificates tzdata \
 # 将builder构建生成的产物复制到这儿
 COPY --from=builder /app/bin/simple-one-api /app/simple-one-api
 
+# 复制当前目录的static目录内的内容到镜像中
+COPY static /app/static
+
+# 暴露应用运行的端口（假设为9090）
 EXPOSE 9090
 CMD ["./simple-one-api", "/app/config/config.json"]
 
